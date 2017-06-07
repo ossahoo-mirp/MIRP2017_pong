@@ -50,57 +50,70 @@ This file consists of all sorts of useful variables that you will use throughout
 
 Most constants in this file are self-explanatory based on the name of the variable and the comments throughout the file. If you still aren't sure what one of the variables is, ASK! Or look for where that variable is being used and make an educated guess. Here are some variables that may be confusing:
 
- - BALL_VELOCITY: This is the maximum speed of the ball in each direction. The ball velocity in the x-direction `ballVx` will always have the same magnitude, namely `BALL_VELOCITY,`but opposite signs. The ball velocity in the y-direction `ballVy` will range from `[-BALL_VELOCITY, BALL_VELOCITY]`.
+BALL_VELOCITY: This is the maximum speed of the ball in each direction. In this lab, this variable will be set to the value 20. Then `ballVx` will be either -20 or +20 and `ballVy` will be anything between -20 and +20. 
+
+ - For example: ballVx = 20 and ballVy = 20 means the ball is going at a 45 degree angle (down-right). If ballVx = -20 and ballVy = 10, the ball will be going down-left.
+ - Note the speed of the ball in the x-direction will always be the same, but will be changing in the y-direction.
+ - Note you should never be using the value 20 directly; always use BALL_VELOCITY to represent this value.
 
 **Step 1: Create a ball and its properties**
- The ball will be represented as a circle with the radius specified in the constants file. The ball also has a `position` and `velocity` throughout the game. These variables have been declared in the `constants` file with the appropriate names, but you need to set their values in the appropriate places.
+ The ball will be represented as a circle with the radius specified in the constants file. The ball also has a `position` and `velocity` throughout the game. These variables have been declared in the `constants` file with the appropriate names, but you need to set their values when you start a new game in the `resetGame()` function.
  
- - Write the function `drawBall()` to display the ball in the correct position. the ball and give it a velocity.
- - To draw the ball, you are given the ball radius and color ballRadius = 10 and ballColor = 255 among the defined constants.
- - Give it a velocity BALL_VELOCITY among the constants. 
+ Write the function `drawBall()` to display the ball in its current position with the current velocity using the variables in constants.pde.
 
 **Step 2: Ball-Wall Collision Detection**
-Now it's time to do collisions detection, so the ball bounces off the four walls (no gravity).
-In the `updateBallVelocity()` function, write your code to detect ball collisions with walls or paddles:
-  
- - If collide with paddle, or top/bottom wall, then bounce off
- - If collides with left wall, right player gains one point
- - If collides with right wall, left player gains one point
+When the ball collides with any of the four walls or either of the paddles, some action must be taken:
+
+ - If colliding with any of the four walls, then bounces off (DO NOW)
+ - If colliding with left or right padde, then ball bounces off (DO LATER)
+
+Later, we will modify this code so that the ball hitting the left or right walls will make the player score a point instead of the ball bouncing off, but for now, let the ball bounce from every side!
+
+In the `updateBallVelocity()` function, write code to make the ball bounce from all four walls!
  
 **Step 3: Draw the paddles**
-Now try to write your code for the drawPaddles() function to display Left and Right paddles in correct position.
-To do this you will use the Paddle parameters defined among the constants:  `paddleLength,  paddleWidth, paddleColor`
+Now try to write your code for the `drawPaddles()` function to display the left and right paddles (rectangles) in the correct positions.
+To do this you will use the addle parameters defined among the constants: 
+> paddleLength: the height of the paddle
+> paddleWidth: the width of the paddle
+> paddleColor: the color of the paddle
+> leftPaddle: the Y-position of the left paddle
+> rightPaddle: the Y-position of the right paddle
+Note that you need to figure out what the X-positions of the paddles should be based on the given variables!
 
 **Step 4: Move one paddle**
-This is the time to write your code to make one of the paddles move.
+Fill out the `updatePaddlePositions()` function based on the keys that are pressed. See the key_handling.pde file or constants.pde file to figure out what the different variables do.
 
- - Write you code to make one of the paddles go up and down. To do this fill out the `updatePaddlePositions()` function.
- -  Based on the keys pressedd, move the paddles (update paddle Y position)
+Note that the paddles only move in the vertical direction (update the y-position of the paddle).
 
 **Step 5: Restrict paddle movement**
-Now try to modify your current code for the `updatePaddlePositions()` to restrict motion of paddles to make sure the paddles don't leave the screen.
-Here you will need the `paddleLength` parameter defined in the constants.
+Currently, the paddle can be moved off the screen; that's not good! Let's fix that.
+Modify your current code for `updatePaddlePositions()` to restrict motion of the paddles to make sure the paddles don't leave the screen. Once the paddle reaches the edge of the screen, it should not be able to move further in that direction.
 
 **Step 6: Move both paddles!**
-To make things actually exciting now, make both paddles move independently. Edit your code in `updatePaddlePositions()`.
+To make things actually exciting now, make both paddles move independently. Edit your code in `updatePaddlePositions()` to make both the paddles move based on which keys are pressed!
 
 **Step 7: Ball-Paddle Collision Detection**
 Again now you want to write your code to detect collision of the ball with the paddle. To do this you must write code that detects a large difference between the postion of the ball and the paddle as a miss, and a small difference as a collision. 
 
-Make sure your code takes appropriate action in each case (score a point vs ball is reflected). Remember as we mentioned in lecture, reflection will involve switching the sign of the ball's x velocity. 
+If the ball collides with the paddle, the ball should be reflected. (DO NOW)
+If the paddle misses the ball, a player will score a point. (DO in Step 8).
 
 **Step 8: Player scores a point**
-Detect losing as the ball hitting the left or right wall.
-To do this write your code in the `rightLose()` and `leftLose()` functions in `flow.pde`. Think about what happens when a player scores a point.
+We will modify the code from Step 2 so that the ball colliding with the left or right wall will NOT make it bounce anymore. Instead, if it collides with the left or right wall, the opposite player scores a point.
+
+To do this write your code in the `rightLose()` and `leftLose()` functions in `flow.pde`. Think about what happens when a player scores a point. Make sure to update the player scores and the game screen.
 
 **Step 9: Display scores**
-Write your code for the displayScores() function to display Left and Right player scores on the screen.
+Write your code for the `displayScores()` function to display player scores on the screen. Processing contains a function called text:
+`text(textValue, xPos, yPos)`
+that displays the `textValue` at the corresponding position. You may want to use this function to display the scores. 
 
 **Step 10: Create a start screen**
-Have a start screen that will be displayed when the program is first run. If the reset key is pressed, the game state must return to this start screen as well.
+Have a start screen that will be displayed when the program is first run. If the reset key is pressed or if either player scores a point, the game screen must return to this start screen as well.
 
 **Step 11: Pausing the game**
-If the game is paused, the ball and paddle properties should not be updated until the game is unpaused. Also indicate on the game screen that the game is paused.
+If the game is paused, the ball and paddle properties should not be updated until the game is unpaused. Also indicate on the game screen that the game is paused. You may want to use `text()` function here again to display that the game is paused. You may also want to have a variable that keeps track of the game state (paused or playing) and update your other code until now accordingly!
 
 **Key Handling**
 
