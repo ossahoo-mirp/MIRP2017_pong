@@ -79,6 +79,7 @@ To do this you will use the addle parameters defined among the constants:
 > paddleColor: the color of the paddle
 > leftPaddle: the Y-position of the left paddle
 > rightPaddle: the Y-position of the right paddle
+
 Note that you need to figure out what the X-positions of the paddles should be based on the given variables!
 
 **Step 4: Move one paddle**
