@@ -105,18 +105,31 @@ To make things actually exciting now, make both paddles move independently. Edit
 ## Step 7: Ball-Paddle Collision Detection
 Again now you want to write your code to detect collision of the ball with the paddle. To do this you must write code that detects a large difference between the postion of the ball and the paddle as a miss, and a small difference as a collision. 
 
-If the ball collides with the paddle, the ball should be reflected. Note that there are two conditions that need to be checked. For example, if we are checking collision with th left paddle.
+Note that there are two conditions that need to be checked. For example, if we are checking collision with th left paddle.
  * The *x*-coordinate of the ball should be small (close to the left edge). For instance, we could check whether ```ballX < paddleWidth + ballRadius```, or something similar.
  * The *y*-coordinate of the ball should be within the range of the left paddle. For instance, we could check whether ```ballY < leftPaddle + paddleLength/2```, and ```ballY > leftPaddle - paddleLength/2```.
 
-## Step 8: Player scores a point
+## Step 8: Ball-Paddle Reflection (Bouncing)
+If the ball collides with the paddle, the ball should be reflected. The simplest way of performing reflection, is to make the `x`-velocity of the ball negative i.e. ```ballVx *= -1```.
+
+If you actually do this however, you may notice that the game isn't very interesting, since the ball is effectively just bouncing around a box, with no other velocity changes. We should also modify the `y`-velocity of the ball, *depending on the collision location*.
+
+We will now imagine that the paddle is actually curved. So, if the ball hits the top edge of the paddle, it will be deflected upwards more. Similarly, if it hits the bottom edge of the paddle, it will be deflected further down. More precisely, if the ball hits the (top or bottom) edge of the paddle, it's `y`-velocity will be `-BALL_VELOCITY` or `+BALL_VELOCITY` respectively. A hit in the middle will result in some intermediate velocity.
+
+Here is one possible formula you can use to compute the `y`-velocity after reflection from the paddle.
+```
+buffer = paddleLength/2
+BALL_VELOCITY*(ballY-paddlePosition)/buffer
+```
+
+## Step 9: Player scores a point
 We will modify the code from Step 2 so that the ball colliding with the left or right wall will NOT make it bounce anymore. Instead, if it collides with the left or right wall, the opposite player scores a point.
 
 We can detect this at the same time that we detect the collision of the ball with the paddle. As an example, if the first condition in **Step 7** is satisfied, but the second one is not satisfied, then the *left player* has failed to hit the ball with the paddle, and so the right player should gain one point.
 
-To do this write your code in the `rightLose()` and `leftLose()` functions in `flow.pde`. Think about what happens when a player scores a point. Make sure to update the player scores and the game screen (**Step 9**).
+To do this write your code in the `rightLose()` and `leftLose()` functions in `flow.pde`. Think about what happens when a player scores a point. Make sure to update the player scores and the game screen (**Step 10**).
 
-## Step 9: Display scores
+## Step 10: Display scores
 Write your code for the `displayScores()` function to display player scores on the screen. Processing contains a function called text:
 ```text(textValue, xPosition, yPosition)```
 
