@@ -30,8 +30,6 @@ void updateBallVelocity() {
   }
   // If collide with paddle, or top/bottom wall, then bounce off
 
-  
-  
 }
 
 void updateBallPosition() {

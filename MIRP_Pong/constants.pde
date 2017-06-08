@@ -1,9 +1,9 @@
 // Display Size
-int displayWidth=600, displayHeight=400;
+int displayWidth=600, displayHeight=600;
 
 // Velocity Cnstants
 float BALL_VELOCITY=2;
-float PADDLE_VELOCITY = 10;
+float PADDLE_VELOCITY = 10;  
 int m,n;
 // Background Color
 int bgColor = 0;
@@ -30,7 +30,7 @@ int leftScore, rightScore;
 char LEFT_UP = 'q', LEFT_DOWN = 'a';
 
 // Controls for the Right Paddle
-char RIGHT_UP = 'w', RIGHT_DOWN = 's';
+char RIGHT_UP = 'o', RIGHT_DOWN = 'l';
 
 // Game Controls
 char RESET = 'r', PAUSE = 'p', START = 'o';
