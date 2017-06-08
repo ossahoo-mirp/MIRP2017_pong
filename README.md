@@ -135,14 +135,14 @@ Write your code for the `displayScores()` function to display player scores on t
 
 This displays the `textValue` at the corresponding position. For instance, the line ```text("Hello", 100, 200)``` will display the text **Hello** at the position ```(100, 200)``` You may use this function to display the scores. 
 
-## Step 10: Create a start screen (Optional)
+## Step 11: Create a start screen (Optional)
 Have a start screen that will be displayed when the program is first run. If the reset key is pressed or if either player scores a point, the game screen must return to this start screen as well.
 
 One way to achieve this, is to use a variable ```int gameState = 0```. In general, we can specify a different behavior for each possibe value of ```gameState```.
  * If ```gameState == 0```, then we should show the starting screen. If the ```start``` button is pressed, then we can change the value to `1`.
  * If ```gameState == 1```, then we should show the actual game screen. If the ```reset``` button is pressed, then we can change the value to `0` (to go back to the start screen).
 
-## Step 11: Pausing the game (Optional)
+## Step 12: Pausing the game (Optional)
 If the game is paused, the ball and paddle properties should not be updated until the game is unpaused. Also indicate on the game screen that the game is paused. You may want to use `text()` function here again to display that the game is paused. You may also want to have a variable that keeps track of the game state (paused or playing) and update your other code until now accordingly!
 
 ## Key Handling
